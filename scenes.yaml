@@ -1,0 +1,32 @@
+- id: '1686613501200'
+  name: Hall_2_Led_Off
+  entities:
+    light.gateway_light_286c0785ad14:
+      supported_color_modes:
+      - hs
+      friendly_name: SSW - Led Hall 2
+      supported_features: 0
+      state: 'off'
+  metadata: {}
+- id: '1686613604796'
+  name: Hall_2_Led_On
+  entities:
+    light.gateway_light_286c0785ad14:
+      supported_color_modes:
+      - hs
+      friendly_name: SSW - Led Hall 2
+      supported_features: 0
+      color_mode: hs
+      brightness: 25
+      hs_color:
+      - 27.429
+      - 54.902
+      rgb_color:
+      - 255
+      - 179
+      - 114
+      xy_color:
+      - 0.49
+      - 0.382
+      state: 'on'
+  metadata: {}

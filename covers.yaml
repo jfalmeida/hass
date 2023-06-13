@@ -1,0 +1,165 @@
+#################################################################
+## covers YAML
+#####################################################
+- platform: template
+  covers:
+    rs_living_room_balcony_i:
+      friendly_name: RS - Living room balcony In
+      unique_id: RS000001
+      device_class: shutter
+      position_template: >
+        {% if 100 - (state_attr('cover.rs_living_room_window', 'current_position') | int) > 95 %}
+          {{ 100 }}
+        {% else %}
+          {{ 100 - (state_attr('cover.rs_living_room_window', 'current_position') | int) }}
+        {% endif %}
+      position_template: >
+        {{100 - (state_attr('cover.rs_living_room_balcony','current_position')|int)}}
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.rs_living_room_balcony
+          position: >
+            {{100 - position}}
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.rs_living_room_balcony
+
+    rs_living_room_window_i:
+      friendly_name: RS - Living room Window In
+      unique_id: RS000002
+      device_class: shutter
+      position_template: >
+        {% if 100 - (state_attr('cover.rs_living_room_window_position', 'current_position') | int) > 95 %}
+          {{ 100 }}
+        {% else %}
+          {{ 100 - (state_attr('cover.rs_living_room_window_position', 'current_position') | int) }}
+        {% endif %}
+      position_template: >
+        {{100 - (state_attr('cover.rs_living_room_window_position','current_position')|int)}}
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.rs_living_room_window_position
+          position: >
+            {{100 - position}}
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.rs_living_room_window_position
+
+    rs_bedroom1_i:
+      friendly_name: RS - Bedroom 1 In
+      unique_id: RS000003
+      device_class: shutter
+      position_template: >
+        {% if 100 - (state_attr('cover.rs_bedroom_1', 'current_position') | int) > 95 %}
+          {{ 100 }}
+        {% else %}
+          {{ 100 - (state_attr('cover.rs_bedroom_1', 'current_position') | int) }}
+        {% endif %}
+      position_template: >
+        {{100 - (state_attr('cover.rs_bedroom_1','current_position')|int)}}
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.rs_bedroom_1
+          position: >
+            {{100 - position}}
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.rs_bedroom_1
+
+    rs_bedroom2_i:
+      friendly_name: RS - Bedroom 2 In
+      unique_id: RS000004
+      device_class: shutter
+      position_template: >
+        {% if 100 - (state_attr('cover.rs_bedroom_2', 'current_position') | int) > 95 %}
+          {{ 100 }}
+        {% else %}
+          {{ 100 - (state_attr('cover.rs_bedroom_2', 'current_position') | int) }}
+        {% endif %}
+      position_template: >
+        {{100 - (state_attr('cover.rs_bedroom_2','current_position')|int)}}
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.rs_bedroom_2
+          position: >
+            {{100 - position}}
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.rs_bedroom_2
+
+    rs_suite1_i:
+      friendly_name: RS - Suite 1 In
+      unique_id: RS000005
+      device_class: shutter
+      position_template: >
+        {% if 100 - (state_attr('cover.rs_suite_1', 'current_position') | int) > 95 %}
+          {{ 100 }}
+        {% else %}
+          {{ 100 - (state_attr('cover.rs_suite_1', 'current_position') | int) }}
+        {% endif %}
+      position_template: >
+        {{100 - (state_attr('cover.rs_suite_1','current_position')|int)}}
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.rs_suite_1
+          position: >
+            {{100 - position}}
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.rs_suite_1
+
+    rs_suite2_i:
+      friendly_name: RS - Suite 2 In
+      unique_id: RS000006
+      device_class: shutter
+      position_template: >
+        {% if 100 - (state_attr('cover.rs_suite_2', 'current_position') | int) > 95 %}
+          {{ 100 }}
+        {% else %}
+          {{ 100 - (state_attr('cover.rs_suite_2', 'current_position') | int) }}
+        {% endif %}
+      position_template: >
+        {{100 - (state_attr('cover.rs_suite_2','current_position')|int)}}
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.rs_suite_2
+          position: >
+            {{100 - position}}
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.rs_suite_2
+    
+    rs_suite2_wc_i:
+      friendly_name: RS - Suite 2 - WC In
+      unique_id: RS000007
+      device_class: shutter
+      position_template: >
+        {% if 100 - (state_attr('cover.rs_suite_2_wc_position', 'current_position') | int) > 95 %}
+          {{ 100 }}
+        {% else %}
+          {{ 100 - (state_attr('cover.rs_suite_2_wc_position', 'current_position') | int) }}
+        {% endif %}
+      position_template: >
+        {{100 - (state_attr('cover.rs_suite_2_wc_position','current_position')|int)}}
+      set_cover_position:
+        service: cover.set_cover_position
+        data_template:
+          entity_id: cover.rs_suite_2_wc_position
+          position: >
+            {{100 - position}}
+      stop_cover:
+        service: cover.stop_cover
+        data:
+          entity_id: cover.rs_suite_2_wc_position

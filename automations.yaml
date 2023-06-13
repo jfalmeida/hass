@@ -1,0 +1,707 @@
+- id: '1686354568289'
+  alias: Hall 1 - Lights
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 4fb9128423b89efc4e3269277784117b
+    entity_id: binary_sensor.mcs_apartment_door_contact
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: bd036debbdc851cc14033256f3324a1b
+    entity_id: binary_sensor.pir_hall_1_3
+    domain: binary_sensor
+  condition:
+  - condition: and
+    conditions:
+    - condition: time
+      before: '21:30:00'
+      after: sensor.sun_next_rising
+    - type: is_illuminance
+      condition: device
+      device_id: 5f10498e33220563b2982ccc8a4204fc
+      entity_id: sensor.boiler_bh1750_illuminance
+      domain: sensor
+      below: 800
+  action:
+  - type: turn_on
+    device_id: 4027c217d15cc501d81f8e284496f80d
+    entity_id: switch.ssw_hall_1
+    domain: switch
+  - wait_for_trigger:
+    - type: not_opened
+      platform: device
+      device_id: 4fb9128423b89efc4e3269277784117b
+      entity_id: binary_sensor.mcs_apartment_door_contact
+      domain: binary_sensor
+    - type: no_motion
+      platform: device
+      device_id: bd036debbdc851cc14033256f3324a1b
+      entity_id: binary_sensor.pir_hall_1_3
+      domain: binary_sensor
+    continue_on_timeout: false
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: 4027c217d15cc501d81f8e284496f80d
+    entity_id: switch.ssw_hall_1
+    domain: switch
+  mode: restart
+- id: '1686489077403'
+  alias: Hall 2 - Lights
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 79e46f0189f449cc1b4c89151fca1197
+    entity_id: binary_sensor.pir_hall_2_1_occupancy
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: 8b5e24e42861f50876ae109bfa49732c
+    entity_id: binary_sensor.pir_hall_2_2_occupancy
+    domain: binary_sensor
+  condition:
+  - type: is_illuminance
+    condition: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    below: 800
+  - condition: time
+    before: '21:30:00'
+    after: sensor.sun_next_rising
+  action:
+  - type: turn_on
+    device_id: f20aaa03b9e7c2b78e8c5e2c93d2be6f
+    entity_id: switch.ssw_hall_2
+    domain: switch
+  - wait_for_trigger:
+    - platform: state
+      entity_id: binary_sensor.pir_hall_2_1_occupancy
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.pir_hall_2_2_occupancy
+      to: 'off'
+    continue_on_timeout: false
+  - type: turn_off
+    device_id: f20aaa03b9e7c2b78e8c5e2c93d2be6f
+    entity_id: switch.ssw_hall_2
+    domain: switch
+  mode: restart
+- id: '1686494105722'
+  alias: Bedroom 2 - Lights
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 5e71f636a7f6460a9d79119ce52348ab
+    entity_id: binary_sensor.pir_bedroom_2_occupancy
+    domain: binary_sensor
+  condition:
+  - type: is_illuminance
+    condition: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    below: 800
+  action:
+  - type: turn_on
+    device_id: 2038f9d80f430aef40a376293781be0f
+    entity_id: switch.quarto_2_sw_1
+    domain: switch
+  - wait_for_trigger:
+    - type: no_motion
+      platform: device
+      device_id: 5e71f636a7f6460a9d79119ce52348ab
+      entity_id: binary_sensor.pir_bedroom_2_occupancy
+      domain: binary_sensor
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: 2038f9d80f430aef40a376293781be0f
+    entity_id: switch.quarto_2_sw_1
+    domain: switch
+  mode: restart
+- id: '1686495947712'
+  alias: Living Room - Auto Light on
+  description: ''
+  trigger:
+  - type: illuminance
+    platform: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    below: 800
+  condition:
+  - condition: state
+    entity_id: zone.home
+    state: '1'
+  action:
+  - type: turn_on
+    device_id: 66887593afbd89102019675b7fb20c04
+    entity_id: switch.espurna_ce8f3a_0
+    domain: switch
+  - type: turn_on
+    device_id: 9b177e9e477e08881af089ed3c4e4c0d
+    entity_id: switch.tasmota_sala_sw_1
+    domain: switch
+  - type: turn_on
+    device_id: 02e1ee3244d00535b6cdecf52d3aa35a
+    entity_id: switch.ssw_livingroom_lamp_1
+    domain: switch
+  mode: single
+- id: '1686497237628'
+  alias: Living Room - Switch
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: becda21c264087e4cddb4c5b275887f0
+    type: click
+    subtype: single
+    discovery_id: 0x00158d0001568142 click_single
+  condition: []
+  action:
+  - if:
+    - condition: or
+      conditions:
+      - condition: device
+        type: is_off
+        device_id: 9b177e9e477e08881af089ed3c4e4c0d
+        entity_id: switch.tasmota_sala_sw_1
+        domain: switch
+      - condition: device
+        type: is_off
+        device_id: 02e1ee3244d00535b6cdecf52d3aa35a
+        entity_id: switch.ssw_livingroom_lamp_1
+        domain: switch
+      - condition: device
+        type: is_off
+        device_id: 66887593afbd89102019675b7fb20c04
+        entity_id: switch.espurna_ce8f3a_0
+        domain: switch
+    then:
+    - type: turn_on
+      device_id: 9b177e9e477e08881af089ed3c4e4c0d
+      entity_id: switch.tasmota_sala_sw_1
+      domain: switch
+    - type: turn_on
+      device_id: 02e1ee3244d00535b6cdecf52d3aa35a
+      entity_id: switch.ssw_livingroom_lamp_1
+      domain: switch
+    - type: turn_on
+      device_id: 66887593afbd89102019675b7fb20c04
+      entity_id: switch.espurna_ce8f3a_0
+      domain: switch
+    else:
+    - type: turn_off
+      device_id: 9b177e9e477e08881af089ed3c4e4c0d
+      entity_id: switch.tasmota_sala_sw_1
+      domain: switch
+    - type: turn_off
+      device_id: 02e1ee3244d00535b6cdecf52d3aa35a
+      entity_id: switch.ssw_livingroom_lamp_1
+      domain: switch
+    - type: turn_off
+      device_id: 66887593afbd89102019675b7fb20c04
+      entity_id: switch.espurna_ce8f3a_0
+      domain: switch
+  mode: single
+- id: '1686498256383'
+  alias: Kitchen - Lights
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 66fc2659d61fff53997465e63625e660
+    entity_id: binary_sensor.pir_kitchen_1_occupancy
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: fa6b9f959572523773a417773ccb143a
+    entity_id: binary_sensor.pir_kitchen_2_occupancy
+    domain: binary_sensor
+  condition:
+  - type: is_illuminance
+    condition: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    below: 800
+  - condition: time
+    before: '21:30:00'
+    after: sensor.sun_next_rising
+  action:
+  - type: turn_on
+    device_id: c97a13ae0513e5989f75727419a4311e
+    entity_id: switch.tm_kitchen2
+    domain: switch
+  - wait_for_trigger:
+    - platform: state
+      entity_id: binary_sensor.pir_hall_2_1_occupancy
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.pir_hall_2_2_occupancy
+      to: 'off'
+    continue_on_timeout: false
+  - if:
+    - condition: time
+      after: '20:00:00'
+      before: '21:00:00'
+    then:
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+    else:
+    - delay:
+        hours: 0
+        minutes: 2
+        seconds: 0
+        milliseconds: 0
+  - type: turn_off
+    device_id: c97a13ae0513e5989f75727419a4311e
+    entity_id: switch.tm_kitchen2
+    domain: switch
+  mode: restart
+- id: '1686498998510'
+  alias: Kitchen - LED Strip
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 66fc2659d61fff53997465e63625e660
+    entity_id: binary_sensor.pir_kitchen_1_occupancy
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: fa6b9f959572523773a417773ccb143a
+    entity_id: binary_sensor.pir_kitchen_2_occupancy
+    domain: binary_sensor
+  condition:
+  - type: is_illuminance
+    condition: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    below: 800
+  action:
+  - type: turn_on
+    device_id: c97a13ae0513e5989f75727419a4311e
+    entity_id: switch.tm_kitchen1
+    domain: switch
+  - wait_for_trigger:
+    - platform: state
+      entity_id: binary_sensor.pir_kitchen_1_occupancy
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.pir_kitchen_2_occupancy
+      from: 'on'
+      to: 'off'
+  - if:
+    - condition: time
+      after: '20:00:00'
+      before: '21:00:00'
+    then:
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+    else:
+    - delay:
+        hours: 0
+        minutes: 2
+        seconds: 0
+        milliseconds: 0
+    enabled: true
+  - type: turn_off
+    device_id: c97a13ae0513e5989f75727419a4311e
+    entity_id: switch.tm_kitchen1
+    domain: switch
+  mode: restart
+- id: '1686525584535'
+  alias: Open-Shutters-Weekdays-Bedrooms
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:50:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - device_id: daa90032969b868edd7ad80f141aae2c
+    domain: cover
+    entity_id: cover.rs_bedroom1_i
+    type: set_position
+    position: 10
+  - device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    domain: cover
+    entity_id: cover.rs_bedroom2_i
+    type: set_position
+    position: 10
+  - device_id: 00a3405721c0119607bf39f37e2beafb
+    domain: cover
+    entity_id: cover.rs_suite1_i
+    type: set_position
+    position: 10
+  - device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    domain: cover
+    entity_id: cover.rs_suite2_i
+    type: set_position
+    position: 10
+  - device_id: 308ba128ee666032c6fc293952731e0f
+    domain: cover
+    entity_id: cover.rs_suite2_wc_i
+    type: set_position
+    position: 10
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - device_id: daa90032969b868edd7ad80f141aae2c
+    domain: cover
+    entity_id: cover.rs_bedroom1_i
+    type: open
+  - device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    domain: cover
+    entity_id: cover.rs_bedroom2_i
+    type: open
+  - device_id: 00a3405721c0119607bf39f37e2beafb
+    domain: cover
+    entity_id: cover.rs_suite1_i
+    type: open
+  - device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    domain: cover
+    entity_id: cover.rs_suite2_i
+    type: open
+  - device_id: 308ba128ee666032c6fc293952731e0f
+    domain: cover
+    entity_id: cover.rs_suite2_wc_i
+    type: open
+  mode: single
+- id: '1686525773419'
+  alias: Open-Shutters-Weekend-Bedrooms
+  description: ''
+  trigger:
+  - platform: time
+    at: '10:20:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+  - device_id: daa90032969b868edd7ad80f141aae2c
+    domain: cover
+    entity_id: cover.rs_bedroom1_i
+    type: set_position
+    position: 10
+  - device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    domain: cover
+    entity_id: cover.rs_bedroom2_i
+    type: set_position
+    position: 10
+  - device_id: 00a3405721c0119607bf39f37e2beafb
+    domain: cover
+    entity_id: cover.rs_suite1_i
+    type: set_position
+    position: 10
+  - device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    domain: cover
+    entity_id: cover.rs_suite2_i
+    type: set_position
+    position: 10
+  - device_id: 308ba128ee666032c6fc293952731e0f
+    domain: cover
+    entity_id: cover.rs_suite2_wc_i
+    type: set_position
+    position: 10
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - device_id: daa90032969b868edd7ad80f141aae2c
+    domain: cover
+    entity_id: cover.rs_bedroom1_i
+    type: open
+  - device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    domain: cover
+    entity_id: cover.rs_bedroom2_i
+    type: open
+  - device_id: 00a3405721c0119607bf39f37e2beafb
+    domain: cover
+    entity_id: cover.rs_suite1_i
+    type: open
+  - device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    domain: cover
+    entity_id: cover.rs_suite2_i
+    type: open
+  - device_id: 308ba128ee666032c6fc293952731e0f
+    domain: cover
+    entity_id: cover.rs_suite2_wc_i
+    type: open
+  mode: single
+- id: '1686525854306'
+  alias: Open-Shutters-Livingroom
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:00:00
+  condition: []
+  action:
+  - device_id: 07ae62a13eb40150cac56123a56437b0
+    domain: cover
+    entity_id: cover.rs_living_room_balcony_i
+    type: open
+  - device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    domain: cover
+    entity_id: cover.rs_living_room_window_i
+    type: open
+  mode: single
+- id: '1686527930319'
+  alias: Close-Shutters-Weekend-Livingroom
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '180'
+  condition:
+  - condition: time
+    weekday:
+    - fri
+    - sat
+  - type: is_wind_speed
+    condition: device
+    device_id: e1ac9b49f2c6236fd5dccbeb3ca7f4c1
+    entity_id: sensor.openweathermap_wind_speed
+    domain: sensor
+    below: 20
+  action:
+  - device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    domain: cover
+    entity_id: cover.rs_living_room_balcony_i
+    type: close
+  - device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    domain: cover
+    entity_id: cover.rs_living_room_window_i
+    type: close
+  mode: single
+- id: '1686528249505'
+  alias: Close-Shutters-Bedrooms
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '30'
+  - platform: time
+    at: '21:30:00'
+  condition: []
+  action:
+  - device_id: daa90032969b868edd7ad80f141aae2c
+    domain: cover
+    entity_id: cover.rs_bedroom1_i
+    type: close
+  - device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    domain: cover
+    entity_id: cover.rs_bedroom2_i
+    type: close
+  - device_id: 00a3405721c0119607bf39f37e2beafb
+    domain: cover
+    entity_id: cover.rs_suite1_i
+    type: close
+  - device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    domain: cover
+    entity_id: cover.rs_suite2_i
+    type: close
+  - device_id: 308ba128ee666032c6fc293952731e0f
+    domain: cover
+    entity_id: cover.rs_suite2_wc_i
+    type: close
+  mode: single
+- id: '1686528640201'
+  alias: Close-shutter-weekdays-livingroom
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '120'
+  condition:
+  - condition: time
+    weekday:
+    - thu
+    - wed
+    - tue
+    - sun
+    - mon
+  - type: is_wind_speed
+    condition: device
+    device_id: e1ac9b49f2c6236fd5dccbeb3ca7f4c1
+    entity_id: sensor.openweathermap_wind_speed
+    domain: sensor
+    below: 20
+  action:
+  - device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    domain: cover
+    entity_id: cover.rs_living_room_balcony_i
+    type: close
+  - device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    domain: cover
+    entity_id: cover.rs_living_room_window_i
+    type: close
+  mode: single
+- id: '1686529616651'
+  alias: RoboClean-Weekdays
+  description: ''
+  trigger:
+  - platform: time
+    at: 09:15:00
+  condition: []
+  action:
+  - device_id: 68a9fd2626469ec495b6f1b34772a832
+    domain: vacuum
+    entity_id: vacuum.valetudo_puzzlingyouthfuldugong
+    type: clean
+  mode: single
+- id: '1686529832620'
+  alias: Auto-Blinds-Tempbased
+  description: ''
+  trigger:
+  - type: temperature
+    platform: device
+    device_id: e1ac9b49f2c6236fd5dccbeb3ca7f4c1
+    entity_id: sensor.openweathermap_feels_like_temperature
+    domain: sensor
+    above: 27
+  condition:
+  - condition: numeric_state
+    entity_id: zone.home
+    above: 0
+  action:
+  - device_id: daa90032969b868edd7ad80f141aae2c
+    domain: cover
+    entity_id: cover.rs_bedroom1_i
+    type: set_position
+    position: 10
+  - device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    domain: cover
+    entity_id: cover.rs_bedroom2_i
+    type: set_position
+    position: 10
+  - device_id: 00a3405721c0119607bf39f37e2beafb
+    domain: cover
+    entity_id: cover.rs_suite1_i
+    type: set_position
+    position: 10
+  - device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    domain: cover
+    entity_id: cover.rs_suite2_i
+    type: set_position
+    position: 10
+  - device_id: 308ba128ee666032c6fc293952731e0f
+    domain: cover
+    entity_id: cover.rs_suite2_wc_i
+    type: set_position
+    position: 10
+  - device_id: 07ae62a13eb40150cac56123a56437b0
+    domain: cover
+    entity_id: cover.rs_living_room_balcony_i
+    type: set_position
+    position: 10
+  - device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    domain: cover
+    entity_id: cover.rs_living_room_window_i
+    type: set_position
+    position: 10
+  mode: single
+- id: '1686646823383'
+  alias: Hall 2 - LED
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 79e46f0189f449cc1b4c89151fca1197
+    entity_id: binary_sensor.pir_hall_2_1_occupancy
+    domain: binary_sensor
+  - type: motion
+    platform: device
+    device_id: 8b5e24e42861f50876ae109bfa49732c
+    entity_id: binary_sensor.pir_hall_2_2_occupancy
+    domain: binary_sensor
+  condition:
+  - type: is_illuminance
+    condition: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    below: 800
+    enabled: true
+  - condition: time
+    after: '21:30:00'
+    before: sensor.sun_next_rising
+    enabled: true
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.hall_2_led_on
+    metadata: {}
+  - wait_for_trigger:
+    - platform: state
+      entity_id: binary_sensor.pir_hall_2_1_occupancy
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.pir_hall_2_2_occupancy
+      to: 'off'
+    continue_on_timeout: false
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - service: scene.turn_on
+    target:
+      entity_id: scene.hall_2_led
+    metadata: {}
+  mode: single
+- id: '1686650055334'
+  alias: Living Room - Auto Light off
+  description: ''
+  trigger:
+  - type: illuminance
+    platform: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    above: 800
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 66887593afbd89102019675b7fb20c04
+    entity_id: switch.espurna_ce8f3a_0
+    domain: switch
+  - type: turn_off
+    device_id: 9b177e9e477e08881af089ed3c4e4c0d
+    entity_id: switch.tasmota_sala_sw_1
+    domain: switch
+  - type: turn_off
+    device_id: 02e1ee3244d00535b6cdecf52d3aa35a
+    entity_id: switch.ssw_livingroom_lamp_1
+    domain: switch
+  mode: single
