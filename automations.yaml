@@ -141,21 +141,21 @@
     domain: sensor
     below: 800
   condition:
-  - condition: state
+  - condition: numeric_state
     entity_id: zone.home
-    state: '1'
+    above: 0
   action:
   - type: turn_on
     device_id: 66887593afbd89102019675b7fb20c04
     entity_id: switch.espurna_ce8f3a_0
     domain: switch
   - type: turn_on
-    device_id: 9b177e9e477e08881af089ed3c4e4c0d
-    entity_id: switch.tasmota_sala_sw_1
-    domain: switch
-  - type: turn_on
     device_id: 02e1ee3244d00535b6cdecf52d3aa35a
     entity_id: switch.ssw_livingroom_lamp_1
+    domain: switch
+  - type: turn_on
+    device_id: 9b177e9e477e08881af089ed3c4e4c0d
+    entity_id: switch.tasmota_sala_sw_1
     domain: switch
   mode: single
 - id: '1686497237628'
@@ -477,7 +477,7 @@
     type: open
   mode: single
 - id: '1686527930319'
-  alias: Close-Shutters-Weekend-Livingroom
+  alias: Close Living room shutters on weekends
   description: ''
   trigger:
   - platform: sun
@@ -505,7 +505,7 @@
     type: close
   mode: single
 - id: '1686528249505'
-  alias: Close-Shutters-Bedrooms
+  alias: Close Bedroom shutters
   description: ''
   trigger:
   - platform: sun
@@ -537,7 +537,7 @@
     type: close
   mode: single
 - id: '1686528640201'
-  alias: Close-shutter-weekdays-livingroom
+  alias: Close Living room shutters on weekdays
   description: ''
   trigger:
   - platform: sun
@@ -584,7 +584,7 @@
     type: clean
   mode: single
 - id: '1686529832620'
-  alias: Auto-Blinds-Tempbased
+  alias: Close Shutters based on Temperature
   description: ''
   trigger:
   - type: temperature
@@ -732,57 +732,88 @@
   alias: Notification - Open windows
   description: ''
   trigger:
-  - platform: device
-    domain: mqtt
-    device_id: becda21c264087e4cddb4c5b275887f0
-    type: click
-    subtype: double
-    discovery_id: 0x00158d0001568142 click_double
+  - platform: time
+    at: '23:00:00'
   condition:
-  - condition: or
-    conditions:
-    - type: is_open
-      condition: device
-      device_id: bdd1a3ec13a0fd001fb27cda6cd14a2d
-      entity_id: binary_sensor.mcs_bedroom_1_contact
-      domain: binary_sensor
-    - type: is_open
-      condition: device
-      device_id: 645f8f83ae6989a0bab77126594e0ee9
-      entity_id: binary_sensor.mcs_bedroom_2_contact
-      domain: binary_sensor
-    - type: is_open
-      condition: device
-      device_id: ac0e106b96e4bccdad2ac28b3014c584
-      entity_id: binary_sensor.mcs_kitchen_window_contact
-      domain: binary_sensor
-    - type: is_open
-      condition: device
-      device_id: 2920637d39c6929bab323fd520259406
-      entity_id: binary_sensor.mcs_livingroom_balcony_contact
-      domain: binary_sensor
-    - type: is_open
-      condition: device
-      device_id: a77c6c84c19da66ab02759ee70fd0445
-      entity_id: binary_sensor.mcs_livingroom_window_contact
-      domain: binary_sensor
-    - type: is_open
-      condition: device
-      device_id: f6ce473cdeb49f29b50654a30e5e481e
-      entity_id: binary_sensor.mcs_suite_1_contact
-      domain: binary_sensor
-    - type: is_open
-      condition: device
-      device_id: da2e97aff985c8ac9df6a6f5bea28bea
-      entity_id: binary_sensor.mcs_suite_2_contact
-      domain: binary_sensor
-    - type: is_open
-      condition: device
-      device_id: e0251f2f9ea6b0d89eeafa463a577fb3
-      entity_id: binary_sensor.mcs_suite_2_wc_contact
-      domain: binary_sensor
+  - condition: state
+    entity_id: binary_sensor.windows
+    state: 'on'
+  action:
+  - data_template:
+      message: "{{\"Current open windows: \\n\"}} {%- for entity in states.binary_sensor.windows.attributes.entity_id
+        -%}\n  {%- if states[entity].state == 'on' -%}\n    {{states[entity].attributes.friendly_name+\"\\n\"}}\n
+        \ {%- endif -%}\n{%- endfor -%}\n"
+    service: notify.mobile_app_cph2413
+  mode: single
+- id: '1686751937205'
+  alias: Notification - Car closed with windows open
+  description: ''
+  trigger:
+  - type: locked
+    platform: device
+    device_id: b3d3b6e177057b74d4bda77627bd96dc
+    entity_id: binary_sensor.arteon_doors_locked
+    domain: binary_sensor
+  condition:
+  - type: is_open
+    condition: device
+    device_id: b3d3b6e177057b74d4bda77627bd96dc
+    entity_id: binary_sensor.arteon_windows_closed
+    domain: binary_sensor
   action:
   - service: notify.mobile_app_cph2413
     data:
-      message: You have (at least) one open window.
+      message: You left your car closed with an open window
+  mode: single
+- id: '1686758602172'
+  alias: Notification - Xi Maria replace main brush
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.valetudo_puzzlingyouthfuldugong_main_brush
+    below: 1000
+  condition: []
+  action:
+  - service: notify.mobile_app_cph2413
+    data:
+      message: Please replace the main brush
+  mode: single
+- id: '1686758636956'
+  alias: Notification - Xi Maria replace main filter
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.valetudo_puzzlingyouthfuldugong_main_filter
+    below: 1000
+  condition: []
+  action:
+  - service: notify.mobile_app_cph2413
+    data:
+      message: Please replace the main filter
+  mode: single
+- id: '1686758686705'
+  alias: Notification - Xi Maria - Replace right brush
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.valetudo_puzzlingyouthfuldugong_right_brush
+    below: 1000
+  condition: []
+  action:
+  - service: notify.mobile_app_cph2413
+    data:
+      message: Please replace the right brush
+  mode: single
+- id: '1686758808586'
+  alias: Notification - Xi Maria - clean the sensors
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.valetudo_puzzlingyouthfuldugong_sensor_cleaning
+    below: 1000
+  condition: []
+  action:
+  - service: notify.mobile_app_cph2413
+    data:
+      message: Please clean the sensors
   mode: single
