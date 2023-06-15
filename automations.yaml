@@ -833,3 +833,184 @@
       - Local add-ons
       keep_days: 14
   mode: single
+- id: '1686838925518'
+  alias: ' Auto - TV - Off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - zone.home
+    to: '0'
+  - platform: time
+    at: 03:00:00
+  condition: []
+  action:
+  - type: turn_off
+    device_id: c6592ad2c2b18119333fb38370a25059
+    entity_id: switch.ssw_tv_living_room
+    domain: switch
+  - type: turn_off
+    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    entity_id: switch.ssw_tv_suite_1
+    domain: switch
+  mode: single
+- id: '1686849479389'
+  alias: Auto - TV - ON - Back - Week - Living room
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - zone.home
+    from: '0'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    after: '18:00:00'
+  action:
+  - type: turn_on
+    device_id: 216fa8ed5f19fbe61cb90c563567af0c
+    entity_id: remote.tv_da_sala_de_estar
+    domain: remote
+  mode: single
+- id: '1686849607109'
+  alias: Auto - TV - ON - Back - Weekend
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - zone.home
+    from: '0'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+  - type: turn_on
+    device_id: 216fa8ed5f19fbe61cb90c563567af0c
+    entity_id: remote.tv_da_sala_de_estar
+    domain: remote
+  - type: turn_on
+    device_id: c6592ad2c2b18119333fb38370a25059
+    entity_id: switch.ssw_tv_living_room
+    domain: switch
+  mode: single
+- id: '1686849654686'
+  alias: Auto - TV - ON - Back - Week - Suite 1
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - zone.home
+    from: '0'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    after: '20:00:00'
+  action:
+  - type: turn_on
+    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    entity_id: switch.ssw_tv_suite_1
+    domain: switch
+  mode: single
+- id: '1686850060987'
+  alias: Auto - TV - ON - Time - Weekend
+  description: ''
+  trigger:
+  - platform: time
+    at: '12:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  - condition: numeric_state
+    entity_id: zone.home
+    above: 0
+  action:
+  - type: turn_on
+    device_id: 216fa8ed5f19fbe61cb90c563567af0c
+    entity_id: remote.tv_da_sala_de_estar
+    domain: remote
+  - type: turn_on
+    device_id: c6592ad2c2b18119333fb38370a25059
+    entity_id: switch.ssw_tv_living_room
+    domain: switch
+  mode: single
+- id: '1686850157691'
+  alias: Auto - TV - ON - Time - Week - Living Room
+  description: ''
+  trigger:
+  - platform: time
+    at: '18:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - thu
+    - fri
+    - wed
+    - tue
+    - mon
+  - condition: numeric_state
+    entity_id: zone.home
+    above: 0
+  action:
+  - type: turn_on
+    device_id: c6592ad2c2b18119333fb38370a25059
+    entity_id: switch.ssw_tv_living_room
+    domain: switch
+  mode: single
+- id: '1686850236930'
+  alias: Auto - TV - ON - Time - Week - Suite 1
+  description: ''
+  trigger:
+  - platform: time
+    at: '20:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - thu
+    - fri
+    - wed
+    - tue
+    - mon
+  - condition: numeric_state
+    entity_id: zone.home
+    above: 0
+  action:
+  - type: turn_on
+    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    entity_id: switch.ssw_tv_suite_1
+    domain: switch
+  mode: single
+- id: '1686850895113'
+  alias: Tv - Switch
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: becda21c264087e4cddb4c5b275887f0
+    type: click
+    subtype: double
+    discovery_id: 0x00158d0001568142 click_double
+  condition: []
+  action:
+  - type: turn_on
+    device_id: c6592ad2c2b18119333fb38370a25059
+    entity_id: switch.ssw_tv_living_room
+    domain: switch
+  - type: turn_on
+    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    entity_id: switch.ssw_tv_suite_1
+    domain: switch
+  mode: single
