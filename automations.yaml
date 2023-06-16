@@ -1,5 +1,5 @@
 - id: '1686354568289'
-  alias: Hall 1 - Lights
+  alias: Lights - Hall 1 
   description: ''
   trigger:
   - type: opened
@@ -68,7 +68,7 @@
     domain: switch
   mode: restart
 - id: '1686489077403'
-  alias: Hall 2 - Lights
+  alias: Lights - Hall 2
   description: ''
   trigger:
   - platform: state
@@ -111,7 +111,7 @@
     domain: switch
   mode: restart
 - id: '1686494105722'
-  alias: Bedroom 2 - Lights
+  alias: Lights - Bedroom 2
   description: ''
   trigger:
   - type: motion
@@ -159,7 +159,7 @@
     domain: switch
   mode: restart
 - id: '1686495947712'
-  alias: Living Room - Auto Light on
+  alias: Lights - Living Room - Auto on
   description: ''
   trigger:
   - type: illuminance
@@ -187,7 +187,7 @@
     domain: switch
   mode: single
 - id: '1686497237628'
-  alias: Living Room - Switch
+  alias: Lights - Living Room - Switch
   description: ''
   trigger:
   - platform: device
@@ -244,7 +244,7 @@
       domain: switch
   mode: single
 - id: '1686498256383'
-  alias: Kitchen - Lights
+  alias: Lights - Kitchen
   description: ''
   trigger:
   - platform: state
@@ -304,7 +304,7 @@
     domain: switch
   mode: restart
 - id: '1686498998510'
-  alias: Kitchen - LED Strip
+  alias: Lights - Kitchen - LED Strip
   description: ''
   trigger:
   - platform: state
@@ -361,7 +361,7 @@
     domain: switch
   mode: restart
 - id: '1686525584535'
-  alias: Open-Shutters-Weekdays-Bedrooms
+  alias: Shutters - Open - Weekdays - Bedrooms
   description: ''
   trigger:
   - platform: time
@@ -427,7 +427,7 @@
     type: open
   mode: single
 - id: '1686525773419'
-  alias: Open-Shutters-Weekend-Bedrooms
+  alias: Shutters - Open - Weekend - Bedrooms
   description: ''
   trigger:
   - platform: time
@@ -490,7 +490,7 @@
     type: open
   mode: single
 - id: '1686525854306'
-  alias: Open-Shutters-Livingroom
+  alias: Shutters - Open - Livingroom
   description: ''
   trigger:
   - platform: time
@@ -507,7 +507,7 @@
     type: open
   mode: single
 - id: '1686527930319'
-  alias: Close Living room shutters on weekends
+  alias: Shutters - Close - Weekends - Living room
   description: ''
   trigger:
   - platform: sun
@@ -535,7 +535,7 @@
     type: close
   mode: single
 - id: '1686528249505'
-  alias: Close Bedroom shutters
+  alias: Shutters - Close - Bedroom
   description: ''
   trigger:
   - platform: sun
@@ -567,7 +567,7 @@
     type: close
   mode: single
 - id: '1686528640201'
-  alias: Close Living room shutters on weekdays
+  alias: Shutters - Close - Weekdays - Living room
   description: ''
   trigger:
   - platform: sun
@@ -598,7 +598,7 @@
     type: close
   mode: single
 - id: '1686529616651'
-  alias: RoboClean-Weekdays
+  alias: RoboClean - Weekdays
   description: ''
   trigger:
   - platform: time
@@ -611,7 +611,7 @@
     type: clean
   mode: single
 - id: '1686529832620'
-  alias: Close Shutters based on Temperature
+  alias: Shutters - Close - Temperature
   description: ''
   trigger:
   - type: temperature
@@ -662,7 +662,7 @@
     position: 10
   mode: single
 - id: '1686646823383'
-  alias: Hall 2 - LED
+  alias: Lights - Hall 2 - LED
   description: ''
   trigger:
   - platform: state
@@ -712,7 +712,7 @@
     metadata: {}
   mode: single
 - id: '1686650055334'
-  alias: Living Room - Auto Light off
+  alias: Lights - Living Room - Auto Light off
   description: ''
   trigger:
   - type: illuminance
@@ -846,7 +846,7 @@
       message: Please clean the sensors
   mode: single
 - id: '1686779582235'
-  alias: Automatic Daily partial backup
+  alias: Backups - Daily partial
   description: ''
   trigger:
   - platform: time
@@ -874,7 +874,7 @@
       keep_days: 7
   mode: single
 - id: '1686779805494'
-  alias: Automatic Weekly full backup
+  alias: Backups - Weekly Full
   description: ''
   trigger:
   - platform: time
@@ -897,7 +897,7 @@
       keep_days: 14
   mode: single
 - id: '1686838925518'
-  alias: ' Auto - TV - Off'
+  alias: ' TV - Auto - Off'
   description: ''
   trigger:
   - platform: state
@@ -918,7 +918,7 @@
     domain: switch
   mode: single
 - id: '1686849479389'
-  alias: Auto - TV - ON - Back - Week - Living room
+  alias: TV - Auto - ON - Back - Week - Living room
   description: ''
   trigger:
   - platform: state
@@ -941,7 +941,7 @@
     domain: remote
   mode: single
 - id: '1686849607109'
-  alias: Auto - TV - ON - Back - Weekend
+  alias: TV - Auto - ON - Back - Weekend
   description: ''
   trigger:
   - platform: state
@@ -964,7 +964,7 @@
     domain: switch
   mode: single
 - id: '1686849654686'
-  alias: Auto - TV - ON - Back - Week - Suite 1
+  alias: TV - Auto - ON - Back - Week - Suite 1
   description: ''
   trigger:
   - platform: state
@@ -987,7 +987,7 @@
     domain: switch
   mode: single
 - id: '1686850060987'
-  alias: Auto - TV - ON - Time - Weekend
+  alias: TV - Auto - ON - Time - Weekend
   description: ''
   trigger:
   - platform: time
@@ -1011,7 +1011,7 @@
     domain: switch
   mode: single
 - id: '1686850157691'
-  alias: Auto - TV - ON - Time - Week - Living Room
+  alias: TV - Auto - ON - Time - Week - Living Room
   description: ''
   trigger:
   - platform: time
@@ -1034,7 +1034,7 @@
     domain: switch
   mode: single
 - id: '1686850236930'
-  alias: Auto - TV - ON - Time - Week - Suite 1
+  alias: TV - Auto - ON - Time - Week - Suite 1
   description: ''
   trigger:
   - platform: time
