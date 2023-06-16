@@ -1,5 +1,5 @@
 - id: '1686354568289'
-  alias: Lights - Hall 1 
+  alias: Lights - Hall 1 - On
   description: ''
   trigger:
   - type: opened
@@ -45,30 +45,9 @@
     device_id: 4027c217d15cc501d81f8e284496f80d
     entity_id: switch.ssw_hall_1
     domain: switch
-  - wait_for_trigger:
-    - type: not_opened
-      platform: device
-      device_id: 4fb9128423b89efc4e3269277784117b
-      entity_id: binary_sensor.mcs_apartment_door_contact
-      domain: binary_sensor
-    - type: no_motion
-      platform: device
-      device_id: bd036debbdc851cc14033256f3324a1b
-      entity_id: binary_sensor.pir_hall_1_3
-      domain: binary_sensor
-    continue_on_timeout: false
-  - delay:
-      hours: 0
-      minutes: 2
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: 4027c217d15cc501d81f8e284496f80d
-    entity_id: switch.ssw_hall_1
-    domain: switch
-  mode: restart
+  mode: single
 - id: '1686489077403'
-  alias: Lights - Hall 2
+  alias: Lights - Hall 2 - On
   description: ''
   trigger:
   - platform: state
@@ -99,19 +78,9 @@
     device_id: f20aaa03b9e7c2b78e8c5e2c93d2be6f
     entity_id: switch.ssw_hall_2
     domain: switch
-  - wait_for_trigger:
-    - platform: state
-      entity_id:
-      - binary_sensor.pir_hall_2_group
-      to: 'off'
-    continue_on_timeout: false
-  - type: turn_off
-    device_id: f20aaa03b9e7c2b78e8c5e2c93d2be6f
-    entity_id: switch.ssw_hall_2
-    domain: switch
-  mode: restart
+  mode: single
 - id: '1686494105722'
-  alias: Lights - Bedroom 2
+  alias: Lights - Bedroom 2 - On
   description: ''
   trigger:
   - type: motion
@@ -142,24 +111,9 @@
     device_id: 2038f9d80f430aef40a376293781be0f
     entity_id: switch.quarto_2_sw_1
     domain: switch
-  - wait_for_trigger:
-    - type: no_motion
-      platform: device
-      device_id: 5e71f636a7f6460a9d79119ce52348ab
-      entity_id: binary_sensor.pir_bedroom_2_occupancy
-      domain: binary_sensor
-  - delay:
-      hours: 0
-      minutes: 2
-      seconds: 0
-      milliseconds: 0
-  - type: turn_off
-    device_id: 2038f9d80f430aef40a376293781be0f
-    entity_id: switch.quarto_2_sw_1
-    domain: switch
-  mode: restart
+  mode: single
 - id: '1686495947712'
-  alias: Lights - Living Room - Auto on
+  alias: Lights - Living Room - Auto On
   description: ''
   trigger:
   - type: illuminance
@@ -244,7 +198,7 @@
       domain: switch
   mode: single
 - id: '1686498256383'
-  alias: Lights - Kitchen
+  alias: Lights - Kitchen - On
   description: ''
   trigger:
   - platform: state
@@ -275,36 +229,9 @@
     device_id: c97a13ae0513e5989f75727419a4311e
     entity_id: switch.tm_kitchen2
     domain: switch
-  - wait_for_trigger:
-    - platform: state
-      entity_id:
-      - binary_sensor.pir_kitchen_group
-      to: 'off'
-    continue_on_timeout: false
-  - if:
-    - condition: time
-      after: '20:00:00'
-      before: '21:00:00'
-    then:
-    - delay:
-        hours: 0
-        minutes: 5
-        seconds: 0
-        milliseconds: 0
-    else:
-    - delay:
-        hours: 0
-        minutes: 2
-        seconds: 0
-        milliseconds: 0
-    enabled: true
-  - type: turn_off
-    device_id: c97a13ae0513e5989f75727419a4311e
-    entity_id: switch.tm_kitchen2
-    domain: switch
-  mode: restart
+  mode: single
 - id: '1686498998510'
-  alias: Lights - Kitchen - LED Strip
+  alias: Lights - Kitchen - LED Strip - On
   description: ''
   trigger:
   - platform: state
@@ -332,34 +259,7 @@
     device_id: c97a13ae0513e5989f75727419a4311e
     entity_id: switch.tm_kitchen1
     domain: switch
-  - wait_for_trigger:
-    - platform: state
-      entity_id:
-      - binary_sensor.pir_kitchen_group
-      to: 'off'
-    continue_on_timeout: false
-  - if:
-    - condition: time
-      after: '20:00:00'
-      before: '21:00:00'
-    then:
-    - delay:
-        hours: 0
-        minutes: 5
-        seconds: 0
-        milliseconds: 0
-    else:
-    - delay:
-        hours: 0
-        minutes: 2
-        seconds: 0
-        milliseconds: 0
-    enabled: true
-  - type: turn_off
-    device_id: c97a13ae0513e5989f75727419a4311e
-    entity_id: switch.tm_kitchen1
-    domain: switch
-  mode: restart
+  mode: single
 - id: '1686525584535'
   alias: Shutters - Open - Weekdays - Bedrooms
   description: ''
@@ -662,7 +562,7 @@
     position: 10
   mode: single
 - id: '1686646823383'
-  alias: Lights - Hall 2 - LED
+  alias: Lights - Hall 2 - LED - On
   description: ''
   trigger:
   - platform: state
@@ -695,24 +595,9 @@
     target:
       entity_id: scene.hall_2_led_on
     metadata: {}
-  - wait_for_trigger:
-    - platform: state
-      entity_id:
-      - binary_sensor.pir_hall_2_group
-      to: 'off'
-    continue_on_timeout: false
-  - delay:
-      hours: 0
-      minutes: 2
-      seconds: 0
-      milliseconds: 0
-  - service: scene.turn_on
-    target:
-      entity_id: scene.hall_2_led
-    metadata: {}
   mode: single
 - id: '1686650055334'
-  alias: Lights - Living Room - Auto Light off
+  alias: Lights - Living Room - Auto Off
   description: ''
   trigger:
   - type: illuminance
@@ -846,7 +731,7 @@
       message: Please clean the sensors
   mode: single
 - id: '1686779582235'
-  alias: Backups - Daily partial
+  alias: Backups - Daily Partial
   description: ''
   trigger:
   - platform: time
@@ -897,7 +782,7 @@
       keep_days: 14
   mode: single
 - id: '1686838925518'
-  alias: ' TV - Auto - Off'
+  alias: TV - Auto - Off
   description: ''
   trigger:
   - platform: state
@@ -1057,7 +942,7 @@
     domain: switch
   mode: single
 - id: '1686850895113'
-  alias: Tv - Switch
+  alias: TV - Switch
   description: ''
   trigger:
   - platform: device
@@ -1075,5 +960,136 @@
   - type: turn_on
     device_id: 2dadcab98dc93184ccb2dcce517b54b5
     entity_id: switch.ssw_tv_suite_1
+    domain: switch
+  mode: single
+- id: '1686925837585'
+  alias: Lights - Bedroom 2 - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.pir_bedroom_2_occupancy
+    to: 'off'
+    for:
+      minutes: 2
+  condition:
+  - condition: device
+    type: is_on
+    device_id: 2038f9d80f430aef40a376293781be0f
+    entity_id: switch.quarto_2_sw_1
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: 2038f9d80f430aef40a376293781be0f
+    entity_id: switch.quarto_2_sw_1
+    domain: switch
+  mode: single
+- id: '1686926345468'
+  alias: Lights - Hall 1 - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pir_hall_1_3
+    to: 'off'
+    for:
+      minutes: 2
+  condition:
+  - condition: device
+    type: is_on
+    device_id: 4027c217d15cc501d81f8e284496f80d
+    entity_id: switch.ssw_hall_1
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: 4027c217d15cc501d81f8e284496f80d
+    entity_id: switch.ssw_hall_1
+    domain: switch
+  mode: single
+- id: '1686926836949'
+  alias: Lights - Hall 2 - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pir_hall_2_group
+    to: 'off'
+    for:
+      minutes: 2
+  condition:
+  - condition: device
+    type: is_on
+    device_id: f20aaa03b9e7c2b78e8c5e2c93d2be6f
+    entity_id: switch.ssw_hall_2
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: f20aaa03b9e7c2b78e8c5e2c93d2be6f
+    entity_id: switch.ssw_hall_2
+    domain: switch
+  mode: single
+- id: '1686926938993'
+  alias: Lights - Hall 2 - LED - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pir_hall_2_group
+    to: 'off'
+    for:
+      minutes: 2
+  condition:
+  - condition: device
+    type: is_on
+    device_id: b9abed886332852a57b53358dcba6266
+    entity_id: light.gateway_light_286c0785ad14
+    domain: light
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.hall_2_led
+    metadata: {}
+  mode: single
+- id: '1686927167793'
+  alias: Lights - Kitchen - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pir_kitchen_group
+    to: 'off'
+    for:
+      minutes: 2
+  condition:
+  - condition: device
+    type: is_on
+    device_id: c97a13ae0513e5989f75727419a4311e
+    entity_id: switch.tm_kitchen2
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: c97a13ae0513e5989f75727419a4311e
+    entity_id: switch.tm_kitchen2
+    domain: switch
+  mode: single
+- id: '1686927258355'
+  alias: Lights - Kitchen - LED Strip - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pir_kitchen_group
+    to: 'off'
+    for:
+      minutes: 2
+  condition:
+  - condition: device
+    type: is_on
+    device_id: c97a13ae0513e5989f75727419a4311e
+    entity_id: switch.tm_kitchen1
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: c97a13ae0513e5989f75727419a4311e
+    entity_id: switch.tm_kitchen1
     domain: switch
   mode: single
