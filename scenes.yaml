@@ -17,7 +17,7 @@
       friendly_name: SSW - Led Hall 2
       supported_features: 0
       color_mode: hs
-      brightness: 2
+      brightness: 12
       hs_color:
       - 30
       - 76.078
