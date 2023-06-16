@@ -1,0 +1,13 @@
+# Steps do add user home on docker image
+
+# list docker conainer
+docker container ls
+
+# Access docker
+docker exec --user root --workdir /root -it $container /bin/bash
+
+# Inside docker, add user with nopassword
+adduser --uid 1000 --disabled-password ${USERNAME}
+
+# add the default pip bin install location to the PATH on .bashrc and .profile (?)
+PATH="$PATH:/home/${USERNAME}/.local/bin"
