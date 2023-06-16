@@ -86,7 +86,6 @@
   - condition: state
     entity_id: input_boolean.lowlux
     state: 'on'
-    below: 800
   - type: is_motion
     condition: device
     device_id: 5e71f636a7f6460a9d79119ce52348ab
