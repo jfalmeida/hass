@@ -94,6 +94,10 @@
     entity_id: sensor.boiler_bh1750_illuminance
     domain: sensor
     below: 800
+  - platform: state
+    entity_id:
+    - input_boolean.lowlux
+    to: 'on'
   condition:
   - type: is_illuminance
     condition: device
@@ -106,6 +110,9 @@
     device_id: 5e71f636a7f6460a9d79119ce52348ab
     entity_id: binary_sensor.pir_bedroom_2_occupancy
     domain: binary_sensor
+  - condition: state
+    entity_id: input_boolean.lowlux
+    state: 'on'
   action:
   - type: turn_on
     device_id: 2038f9d80f430aef40a376293781be0f
@@ -1092,4 +1099,21 @@
     device_id: c97a13ae0513e5989f75727419a4311e
     entity_id: switch.tm_kitchen1
     domain: switch
+  mode: single
+- id: '1686927819859'
+  alias: New Automation
+  description: ''
+  trigger:
+  - type: illuminance
+    platform: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    below: 800
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.lowlux
   mode: single
