@@ -1,5 +1,7 @@
 # Steps do add user home on docker image
 
+## Home Assistant
+
 # list docker conainer
 docker container ls
 
@@ -7,7 +9,7 @@ docker container ls
 docker exec --user root --workdir /root -it $container /bin/bash
 
 # Inside docker, add user with nopassword
-adduser --uid 1000 --disabled-password ${USERNAME}
+adduser --uid 1000 --disabled-password pika
 
 # add the default pip bin install location to the PATH on .bashrc and .profile (?)
 PATH="$PATH:/home/${USERNAME}/.local/bin"
