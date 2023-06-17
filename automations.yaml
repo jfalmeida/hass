@@ -476,7 +476,14 @@
   trigger:
   - platform: time
     at: 09:15:00
-  condition: []
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
   - device_id: 68a9fd2626469ec495b6f1b34772a832
     domain: vacuum
@@ -696,34 +703,6 @@
     data:
       message: Please clean the sensors
   mode: single
-- id: '1686779582235'
-  alias: Backups - Daily Partial
-  description: ''
-  trigger:
-  - platform: time
-    at: 05:30:00
-  condition:
-  - condition: time
-    weekday:
-    - tue
-    - thu
-    - fri
-    - wed
-    - sat
-    - sun
-  action:
-  - service: auto_backup.backup_partial
-    data:
-      name: 'AutoBackup: {{ now().strftime(''%a, %-I:%M %p (%d/%m/%Y)'') }}'
-      addons:
-      - core_mariadb
-      folders:
-      - homeassistant
-      - Share
-      - ssl
-      - Local add-ons
-      keep_days: 7
-  mode: single
 - id: '1686779805494'
   alias: Backups - Weekly Full
   description: ''
@@ -748,15 +727,13 @@
       keep_days: 14
   mode: single
 - id: '1686838925518'
-  alias: TV - Auto - Off
+  alias: TV - Auto - Off - Away
   description: ''
   trigger:
   - platform: state
     entity_id:
     - zone.home
     to: '0'
-  - platform: time
-    at: 03:00:00
   condition: []
   action:
   - type: turn_off
@@ -1075,4 +1052,43 @@
     data: {}
     target:
       entity_id: input_boolean.lowlux
+  mode: single
+- id: '1686993016017'
+  alias: TV - Auto - Off - Time - Week
+  description: ''
+  trigger:
+  - platform: time
+    at: 03:00:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - type: turn_off
+    device_id: c6592ad2c2b18119333fb38370a25059
+    entity_id: switch.ssw_tv_living_room
+    domain: switch
+  - type: turn_off
+    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    entity_id: switch.ssw_tv_suite_1
+    domain: switch
+  mode: single
+- id: '1686995153577'
+  alias: New Automation
+  description: ''
+  trigger:
+  - type: illuminance
+    platform: device
+    device_id: 5f10498e33220563b2982ccc8a4204fc
+    entity_id: sensor.boiler_bh1750_illuminance
+    domain: sensor
+    above: 1000
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
   mode: single
