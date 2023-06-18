@@ -764,9 +764,9 @@
     after: '18:00:00'
   action:
   - type: turn_on
-    device_id: 216fa8ed5f19fbe61cb90c563567af0c
-    entity_id: remote.tv_da_sala_de_estar
-    domain: remote
+    device_id: c6592ad2c2b18119333fb38370a25059
+    entity_id: switch.ssw_tv_living_room
+    domain: switch
   mode: single
 - id: '1686849607109'
   alias: TV - Auto - ON - Back - Weekend
@@ -783,9 +783,9 @@
     - sun
   action:
   - type: turn_on
-    device_id: 216fa8ed5f19fbe61cb90c563567af0c
-    entity_id: remote.tv_da_sala_de_estar
-    domain: remote
+    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    entity_id: switch.ssw_tv_suite_1
+    domain: switch
   - type: turn_on
     device_id: c6592ad2c2b18119333fb38370a25059
     entity_id: switch.ssw_tv_living_room
@@ -830,9 +830,9 @@
     above: 0
   action:
   - type: turn_on
-    device_id: 216fa8ed5f19fbe61cb90c563567af0c
-    entity_id: remote.tv_da_sala_de_estar
-    domain: remote
+    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    entity_id: switch.ssw_tv_suite_1
+    domain: switch
   - type: turn_on
     device_id: c6592ad2c2b18119333fb38370a25059
     entity_id: switch.ssw_tv_living_room
@@ -1037,7 +1037,7 @@
     domain: switch
   mode: single
 - id: '1686927819859'
-  alias: Low Lux
+  alias: Low Lux - On
   description: ''
   trigger:
   - type: illuminance
@@ -1078,7 +1078,7 @@
     domain: switch
   mode: single
 - id: '1686995153577'
-  alias: New Automation
+  alias: Low Lux - Off
   description: ''
   trigger:
   - type: illuminance
@@ -1091,4 +1091,6 @@
   action:
   - service: input_boolean.turn_off
     data: {}
+    target:
+      entity_id: input_boolean.lowlux
   mode: single
