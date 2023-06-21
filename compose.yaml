@@ -9,6 +9,7 @@ services:
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
       - /opt/homeassistant:/config
+      - /opt/homeassistant/backups:/backups
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true

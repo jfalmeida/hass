@@ -93,8 +93,8 @@
     domain: binary_sensor
   action:
   - type: turn_on
-    device_id: 2038f9d80f430aef40a376293781be0f
-    entity_id: switch.quarto_2_sw_1
+    device_id: 8dd0cd6f2f4a31eadb46c58c4ce707b0
+    entity_id: switch.ssw_bedroom_2
     domain: switch
   mode: single
 - id: '1686495947712'
@@ -229,8 +229,8 @@
     state: 'on'
   action:
   - type: turn_on
-    device_id: c97a13ae0513e5989f75727419a4311e
-    entity_id: switch.tm_kitchen1
+    device_id: ffea99e1662efd58eb2da56c1e41d4ec
+    entity_id: switch.ssw_kitchen_led_strip
     domain: switch
   mode: single
 - id: '1686525584535'
@@ -578,7 +578,7 @@
   - platform: state
     entity_id:
     - input_boolean.lowlux
-    to: 'on'
+    to: 'off'
   condition: []
   action:
   - type: turn_off
@@ -917,13 +917,13 @@
   condition:
   - condition: device
     type: is_on
-    device_id: 2038f9d80f430aef40a376293781be0f
-    entity_id: switch.quarto_2_sw_1
+    device_id: 8dd0cd6f2f4a31eadb46c58c4ce707b0
+    entity_id: switch.ssw_bedroom_2
     domain: switch
   action:
   - type: turn_off
-    device_id: 2038f9d80f430aef40a376293781be0f
-    entity_id: switch.quarto_2_sw_1
+    device_id: 8dd0cd6f2f4a31eadb46c58c4ce707b0
+    entity_id: switch.ssw_bedroom_2
     domain: switch
   mode: single
 - id: '1686926345468'
@@ -1005,13 +1005,13 @@
   condition:
   - condition: device
     type: is_on
-    device_id: c97a13ae0513e5989f75727419a4311e
-    entity_id: switch.tm_kitchen2
+    device_id: ffea99e1662efd58eb2da56c1e41d4ec
+    entity_id: switch.ssw_kitchen_led_strip
     domain: switch
   action:
   - type: turn_off
-    device_id: c97a13ae0513e5989f75727419a4311e
-    entity_id: switch.tm_kitchen2
+    device_id: ffea99e1662efd58eb2da56c1e41d4ec
+    entity_id: switch.ssw_kitchen_main
     domain: switch
   mode: single
 - id: '1686927258355'
@@ -1027,13 +1027,13 @@
   condition:
   - condition: device
     type: is_on
-    device_id: c97a13ae0513e5989f75727419a4311e
-    entity_id: switch.tm_kitchen1
+    device_id: ffea99e1662efd58eb2da56c1e41d4ec
+    entity_id: switch.ssw_kitchen_led_strip
     domain: switch
   action:
   - type: turn_off
-    device_id: c97a13ae0513e5989f75727419a4311e
-    entity_id: switch.tm_kitchen1
+    device_id: ffea99e1662efd58eb2da56c1e41d4ec
+    entity_id: switch.ssw_kitchen_led_strip
     domain: switch
   mode: single
 - id: '1686927819859'
@@ -1042,8 +1042,8 @@
   trigger:
   - type: illuminance
     platform: device
-    device_id: 5f10498e33220563b2982ccc8a4204fc
-    entity_id: sensor.boiler_bh1750_illuminance
+    device_id: 2ef18ec702cf1516becf5d9561239574
+    entity_id: sensor.boiler_bh1750_illuminance_2
     domain: sensor
     below: 800
   condition: []
@@ -1083,8 +1083,8 @@
   trigger:
   - type: illuminance
     platform: device
-    device_id: 5f10498e33220563b2982ccc8a4204fc
-    entity_id: sensor.boiler_bh1750_illuminance
+    device_id: 2ef18ec702cf1516becf5d9561239574
+    entity_id: sensor.boiler_bh1750_illuminance_2
     domain: sensor
     above: 1000
   condition: []
@@ -1093,4 +1093,26 @@
     data: {}
     target:
       entity_id: input_boolean.lowlux
+  mode: single
+- id: '1687358528542'
+  alias: Notification - Movement Detection with no one home
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: zone.home
+    below: 1
+  condition:
+  - condition: state
+    entity_id: binary_sensor.pir_hall_2_group
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.pir_kitchen_group
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.pir_hall_1_3
+    state: 'on'
+  action:
+  - service: notify.mobile_app_cph2413
+    data:
+      message: Movement Detected!
   mode: single
