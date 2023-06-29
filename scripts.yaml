@@ -1,0 +1,132 @@
+rs_80_bedroom_shutter:
+  alias: RS - 80% Bedroom Shutter
+  sequence:
+  - device_id: daa90032969b868edd7ad80f141aae2c
+    domain: cover
+    entity_id: cover.rs_bedroom_1
+    type: set_position
+    position: 80
+  - device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    domain: cover
+    entity_id: cover.rs_bedroom_2
+    type: set_position
+    position: 80
+  - device_id: 00a3405721c0119607bf39f37e2beafb
+    domain: cover
+    entity_id: cover.rs_suite_1
+    type: set_position
+    position: 80
+  - device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    domain: cover
+    entity_id: cover.rs_suite_2
+    type: set_position
+    position: 80
+  - device_id: 308ba128ee666032c6fc293952731e0f
+    domain: cover
+    entity_id: cover.rs_suite_2_wc_position
+    type: set_position
+    position: 80
+  mode: single
+rs_open_shutters:
+  alias: RS - Open Shutters
+  sequence:
+  - type: turn_off
+    device_id: daa90032969b868edd7ad80f141aae2c
+    entity_id: switch.rs_bedroom_1
+    domain: switch
+  - type: turn_off
+    device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    entity_id: switch.rs_bedroom_2
+    domain: switch
+  - type: turn_off
+    device_id: 00a3405721c0119607bf39f37e2beafb
+    entity_id: switch.rs_suite_1
+    domain: switch
+  - type: turn_off
+    device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    entity_id: switch.rs_suite_2
+    domain: switch
+  - type: turn_off
+    device_id: 308ba128ee666032c6fc293952731e0f
+    entity_id: switch.rs_suite_2_wc_switch
+    domain: switch
+  - type: turn_off
+    device_id: 07ae62a13eb40150cac56123a56437b0
+    entity_id: switch.rs_living_room_balcony
+    domain: switch
+  - type: turn_off
+    device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    entity_id: switch.rs_living_room_window_switch
+    domain: switch
+  mode: single
+rs_close_shutters:
+  alias: RS - Close Shutters
+  sequence:
+  - type: turn_on
+    device_id: daa90032969b868edd7ad80f141aae2c
+    entity_id: switch.rs_bedroom_1
+    domain: switch
+  - type: turn_on
+    device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    entity_id: switch.rs_bedroom_2
+    domain: switch
+  - type: turn_on
+    device_id: 00a3405721c0119607bf39f37e2beafb
+    entity_id: switch.rs_suite_1
+    domain: switch
+  - type: turn_on
+    device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    entity_id: switch.rs_suite_2
+    domain: switch
+  - type: turn_on
+    device_id: 308ba128ee666032c6fc293952731e0f
+    entity_id: switch.rs_suite_2_wc_switch
+    domain: switch
+  - type: turn_on
+    device_id: 07ae62a13eb40150cac56123a56437b0
+    entity_id: switch.rs_living_room_balcony
+    domain: switch
+  - type: turn_on
+    device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    entity_id: switch.rs_living_room_window_switch
+    domain: switch
+  mode: single
+rs_80_shutters:
+  alias: RS - 80% Shutters
+  sequence:
+  - device_id: daa90032969b868edd7ad80f141aae2c
+    domain: cover
+    entity_id: cover.rs_bedroom_1
+    type: set_position
+    position: 80
+  - device_id: 83dd646b578ec0ac91e7fccfa62c52df
+    domain: cover
+    entity_id: cover.rs_bedroom_2
+    type: set_position
+    position: 80
+  - device_id: 00a3405721c0119607bf39f37e2beafb
+    domain: cover
+    entity_id: cover.rs_suite_1
+    type: set_position
+    position: 80
+  - device_id: 9564f9dc1280fca61c4a3ba864d0859a
+    domain: cover
+    entity_id: cover.rs_suite_2
+    type: set_position
+    position: 80
+  - device_id: 308ba128ee666032c6fc293952731e0f
+    domain: cover
+    entity_id: cover.rs_suite_2_wc_position
+    type: set_position
+    position: 80
+  - device_id: 07ae62a13eb40150cac56123a56437b0
+    domain: cover
+    entity_id: cover.rs_living_room_balcony
+    type: set_position
+    position: 80
+  - device_id: 9e8c3bb2afe92b4f3e7ef9bbcf3d7e75
+    domain: cover
+    entity_id: cover.rs_living_room_window_position
+    type: set_position
+    position: 80
+  mode: single

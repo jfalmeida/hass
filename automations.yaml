@@ -9,8 +9,8 @@
     domain: binary_sensor
   - type: motion
     platform: device
-    device_id: bd036debbdc851cc14033256f3324a1b
-    entity_id: binary_sensor.pir_hall_1_3
+    device_id: 66fc2659d61fff53997465e63625e660
+    entity_id: binary_sensor.pir_hall_1_occupancy
     domain: binary_sensor
   - platform: state
     entity_id:
@@ -32,13 +32,13 @@
       domain: binary_sensor
     - type: is_motion
       condition: device
-      device_id: bd036debbdc851cc14033256f3324a1b
-      entity_id: binary_sensor.pir_hall_1_3
+      device_id: 66fc2659d61fff53997465e63625e660
+      entity_id: binary_sensor.pir_hall_1_occupancy
       domain: binary_sensor
   action:
   - type: turn_on
-    device_id: 4027c217d15cc501d81f8e284496f80d
-    entity_id: switch.ssw_hall_1
+    device_id: 742e4e90a240a6e140362e67c958c367
+    entity_id: switch.tasmota
     domain: switch
   mode: single
 - id: '1686489077403'
@@ -119,8 +119,8 @@
     entity_id: switch.ssw_livingroom_lamp_1
     domain: switch
   - type: turn_on
-    device_id: 9b177e9e477e08881af089ed3c4e4c0d
-    entity_id: switch.tasmota_sala_sw_1
+    device_id: 32ba7801a28444c2454673bcedc37533
+    entity_id: switch.ssw_livingroom_lamp
     domain: switch
   mode: single
 - id: '1686497237628'
@@ -155,8 +155,8 @@
         domain: switch
     then:
     - type: turn_on
-      device_id: 9b177e9e477e08881af089ed3c4e4c0d
-      entity_id: switch.tasmota_sala_sw_1
+      device_id: 32ba7801a28444c2454673bcedc37533
+      entity_id: switch.ssw_livingroom_lamp
       domain: switch
     - type: turn_on
       device_id: 02e1ee3244d00535b6cdecf52d3aa35a
@@ -168,8 +168,8 @@
       domain: switch
     else:
     - type: turn_off
-      device_id: 9b177e9e477e08881af089ed3c4e4c0d
-      entity_id: switch.tasmota_sala_sw_1
+      device_id: 32ba7801a28444c2454673bcedc37533
+      entity_id: switch.ssw_livingroom_lamp
       domain: switch
     - type: turn_off
       device_id: 02e1ee3244d00535b6cdecf52d3aa35a
@@ -204,8 +204,8 @@
     state: 'on'
   action:
   - type: turn_on
-    device_id: c97a13ae0513e5989f75727419a4311e
-    entity_id: switch.tm_kitchen2
+    device_id: ffea99e1662efd58eb2da56c1e41d4ec
+    entity_id: switch.ssw_kitchen_main
     domain: switch
   mode: single
 - id: '1686498998510'
@@ -500,10 +500,21 @@
     entity_id: sensor.openweathermap_feels_like_temperature
     domain: sensor
     above: 27
+  - platform: state
+    entity_id:
+    - zone.home
+    attribute: persons
+    to: '0'
   condition:
   - condition: numeric_state
     entity_id: zone.home
-    above: 0
+    below: 1
+  - type: is_temperature
+    condition: device
+    device_id: e1ac9b49f2c6236fd5dccbeb3ca7f4c1
+    entity_id: sensor.openweathermap_feels_like_temperature
+    domain: sensor
+    above: 27
   action:
   - device_id: daa90032969b868edd7ad80f141aae2c
     domain: cover
@@ -586,8 +597,8 @@
     entity_id: switch.espurna_ce8f3a_0
     domain: switch
   - type: turn_off
-    device_id: 9b177e9e477e08881af089ed3c4e4c0d
-    entity_id: switch.tasmota_sala_sw_1
+    device_id: 32ba7801a28444c2454673bcedc37533
+    entity_id: switch.ssw_livingroom_lamp
     domain: switch
   - type: turn_off
     device_id: 02e1ee3244d00535b6cdecf52d3aa35a
@@ -741,7 +752,7 @@
     entity_id: switch.ssw_tv_living_room
     domain: switch
   - type: turn_off
-    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    device_id: 415ad44e7668577bf3a4ec643469d9f6
     entity_id: switch.ssw_tv_suite_1
     domain: switch
   mode: single
@@ -783,7 +794,7 @@
     - sun
   action:
   - type: turn_on
-    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    device_id: 415ad44e7668577bf3a4ec643469d9f6
     entity_id: switch.ssw_tv_suite_1
     domain: switch
   - type: turn_on
@@ -810,7 +821,7 @@
     after: '20:00:00'
   action:
   - type: turn_on
-    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    device_id: 415ad44e7668577bf3a4ec643469d9f6
     entity_id: switch.ssw_tv_suite_1
     domain: switch
   mode: single
@@ -830,7 +841,7 @@
     above: 0
   action:
   - type: turn_on
-    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    device_id: 415ad44e7668577bf3a4ec643469d9f6
     entity_id: switch.ssw_tv_suite_1
     domain: switch
   - type: turn_on
@@ -880,7 +891,7 @@
     above: 0
   action:
   - type: turn_on
-    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    device_id: 415ad44e7668577bf3a4ec643469d9f6
     entity_id: switch.ssw_tv_suite_1
     domain: switch
   mode: single
@@ -901,7 +912,7 @@
     entity_id: switch.ssw_tv_living_room
     domain: switch
   - type: turn_on
-    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    device_id: 415ad44e7668577bf3a4ec643469d9f6
     entity_id: switch.ssw_tv_suite_1
     domain: switch
   mode: single
@@ -932,20 +943,20 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.pir_hall_1_3
+    - binary_sensor.pir_hall_1_occupancy
     to: 'off'
     for:
       minutes: 2
   condition:
   - condition: device
     type: is_on
-    device_id: 4027c217d15cc501d81f8e284496f80d
-    entity_id: switch.ssw_hall_1
+    device_id: 742e4e90a240a6e140362e67c958c367
+    entity_id: switch.tasmota
     domain: switch
   action:
   - type: turn_off
-    device_id: 4027c217d15cc501d81f8e284496f80d
-    entity_id: switch.ssw_hall_1
+    device_id: 742e4e90a240a6e140362e67c958c367
+    entity_id: switch.tasmota
     domain: switch
   mode: single
 - id: '1686926836949'
@@ -1073,7 +1084,7 @@
     entity_id: switch.ssw_tv_living_room
     domain: switch
   - type: turn_off
-    device_id: 2dadcab98dc93184ccb2dcce517b54b5
+    device_id: 415ad44e7668577bf3a4ec643469d9f6
     entity_id: switch.ssw_tv_suite_1
     domain: switch
   mode: single
@@ -1115,4 +1126,129 @@
   - service: notify.mobile_app_cph2413
     data:
       message: Movement Detected!
+  mode: single
+- id: '1687899929887'
+  alias: Lights - Hall 1 - WC - On
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: af19f8eb3c949ab40698920b5fa93a55
+    entity_id: binary_sensor.ble_motion_18c23c2473cf
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: c85968d982524d91b305b6c7cdb37136
+    entity_id: switch.ssw_hall_1_wc
+    domain: switch
+  mode: single
+- id: '1687899996428'
+  alias: Lights - Hall 1 - WC - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.ble_motion_18c23c2473cf
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  condition:
+  - condition: device
+    type: is_on
+    device_id: c85968d982524d91b305b6c7cdb37136
+    entity_id: switch.ssw_hall_1_wc
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: c85968d982524d91b305b6c7cdb37136
+    entity_id: switch.ssw_hall_1_wc
+    domain: switch
+  mode: single
+- id: '1688064019057'
+  alias: Lights - Bedroom 1 - On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pir_hall_1_3
+    to: 'on'
+  - platform: state
+    entity_id:
+    - input_boolean.lowlux
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.lowlux
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.pir_hall_1_3
+    state: 'on'
+  action:
+  - type: turn_on
+    device_id: 4027c217d15cc501d81f8e284496f80d
+    entity_id: switch.ssw_hall_1
+    domain: switch
+  mode: single
+- id: '1688064062354'
+  alias: Lights - Bedroom 1 - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pir_hall_1_3
+    to: 'off'
+    for:
+      minutes: 2
+  condition:
+  - condition: device
+    type: is_on
+    device_id: 4027c217d15cc501d81f8e284496f80d
+    entity_id: switch.ssw_hall_1
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: 4027c217d15cc501d81f8e284496f80d
+    entity_id: switch.ssw_hall_1
+    domain: switch
+  mode: single
+- id: '1688064457478'
+  alias: Lights - Hall 2 - WC - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.ssw_hall_2_wc
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 552bdcad18f71debbe90f5cd491bc58d
+    entity_id: switch.ssw_hall_2_wc
+    domain: switch
+  mode: single
+- id: '1688064498441'
+  alias: Lights - Suite 2 - WC - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.ssw_suite_2_wc
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 77b166f2d7ccb0e61fa697c2462e9f76
+    entity_id: switch.ssw_suite_2_wc
+    domain: switch
   mode: single
